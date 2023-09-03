@@ -633,6 +633,7 @@ parse_arguments() {
 ###
 # FILE TEMPLATES
 ###
+
 # /etc/systemd/system/hysteria-server.service
 tpl_hysteria_server_service_base() {
   local _config_name="$1"

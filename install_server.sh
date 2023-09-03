@@ -669,7 +669,7 @@ tpl_hysteria_server_x_service() {
 }
 
 # /etc/hysteria/config.json
-tpl_etc_hysteria_config_yaml() {
+tpl_etc_hysteria_config_json() {
   cat << EOF
 # listen: :443
 
@@ -875,7 +875,7 @@ perform_remove_hysteria_binary() {
 }
 
 perform_install_hysteria_example_config() {
-  install_content -Dm644 "$(tpl_etc_hysteria_config_yaml)" "$CONFIG_DIR/config.json" ""
+  install_content -Dm644 "$(tpl_etc_hysteria_config_json)" "$CONFIG_DIR/config.json" ""
 }
 
 perform_install_hysteria_systemd() {

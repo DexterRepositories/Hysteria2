@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
-# install_server.sh - hysteria server install script
-# Try `install_server.sh --help` for usage.
+# Script By: Dexter Eskalarte
+# Develop By: MEDIATEK TEAM
 #
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2023 Aperture Internet Laboratory
+# Copyright (c) 2022 Aperture Internet Laboratory
 #
 
 set -e

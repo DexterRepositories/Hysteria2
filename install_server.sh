@@ -30,8 +30,8 @@ SYSTEMD_SERVICES_DIR="/etc/systemd/system"
 CONFIG_DIR="/etc/hysteria"
 
 # URLs of GitHub
-REPO_URL="https://github.com/apernet/hysteria"
-API_BASE_URL="https://api.github.com/repos/apernet/hysteria"
+REPO_URL="https://github.com/DexterRepositories/Hysteria2"
+API_BASE_URL="https://api.github.com/repos/DexterRepositories/Hysteria2"
 
 # curl command line flags.
 # To using a proxy, please specify ALL_PROXY in the environ variable, such like:
@@ -633,19 +633,18 @@ parse_arguments() {
 ###
 # FILE TEMPLATES
 ###
-
 # /etc/systemd/system/hysteria-server.service
 tpl_hysteria_server_service_base() {
   local _config_name="$1"
 
   cat << EOF
 [Unit]
-Description=Hysteria Server Service (${_config_name}.yaml)
+Description=Hysteria Server Service (${_config_name}.json)
 After=network.target
 
 [Service]
 Type=simple
-ExecStart=$EXECUTABLE_INSTALL_PATH server --config ${_config_name}.yaml
+ExecStart=$EXECUTABLE_INSTALL_PATH server --config ${_config_name}.json
 WorkingDirectory=$CONFIG_DIR
 User=$HYSTERIA_USER
 Group=$HYSTERIA_USER
@@ -669,7 +668,7 @@ tpl_hysteria_server_x_service() {
   tpl_hysteria_server_service_base '%i'
 }
 
-# /etc/hysteria/config.yaml
+# /etc/hysteria/config.json
 tpl_etc_hysteria_config_yaml() {
   cat << EOF
 # listen: :443
@@ -876,7 +875,7 @@ perform_remove_hysteria_binary() {
 }
 
 perform_install_hysteria_example_config() {
-  install_content -Dm644 "$(tpl_etc_hysteria_config_yaml)" "$CONFIG_DIR/config.yaml" ""
+  install_content -Dm644 "$(tpl_etc_hysteria_config_yaml)" "$CONFIG_DIR/config.json" ""
 }
 
 perform_install_hysteria_systemd() {
@@ -950,7 +949,7 @@ perform_install() {
     echo
     echo -e "\t+ Take a look at the differences between Hysteria 2 and Hysteria 1 at https://hysteria.network/docs/misc/2-vs-1/"
     echo -e "\t+ Check out the quick server config guide at $(tblue)https://hysteria.network/docs/getting-started/Server/$(treset)"
-    echo -e "\t+ Edit server config file at $(tred)$CONFIG_DIR/config.yaml$(treset)"
+    echo -e "\t+ Edit server config file at $(tred)$CONFIG_DIR/config.json$(treset)"
     echo -e "\t+ Start your hysteria server with $(tred)systemctl start hysteria-server.service$(treset)"
     echo -e "\t+ Configure hysteria start on system boot with $(tred)systemctl enable hysteria-server.service$(treset)"
     echo
@@ -963,7 +962,7 @@ perform_install() {
     echo
     echo -e "\t+ Take a look at the behavior changes in Hysteria 2 at $(tblue)https://hysteria.network/docs/misc/2-vs-1/$(treset)"
     echo -e "\t+ Check out the quick server configuration guide for Hysteria 2 at $(tblue)https://hysteria.network/docs/getting-started/Server/$(treset)"
-    echo -e "\t+ Migrate server config file to the Hysteria 2 at $(tred)$CONFIG_DIR/config.yaml$(treset)"
+    echo -e "\t+ Migrate server config file to the Hysteria 2 at $(tred)$CONFIG_DIR/config.json$(treset)"
     echo -e "\t+ Start your hysteria server with $(tred)systemctl restart hysteria-server.service$(treset)"
     echo -e "\t+ Configure hysteria start on system boot with $(tred)systemctl enable hysteria-server.service$(treset)"
   else

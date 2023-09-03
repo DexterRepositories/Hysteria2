@@ -8,7 +8,6 @@ import sys
 import subprocess
 import datetime
 import shutil
-import requests
 
 # Hyperbole is the official build script for Hysteria.
 # Available environment variables for controlling the build:
@@ -30,7 +29,7 @@ BUILD_DIR = "build"
 CORE_SRC_DIR = "./core"
 EXTRAS_SRC_DIR = "./extras"
 APP_SRC_DIR = "./app"
-APP_SRC_CMD_PKG = "github.com/apernet/hysteria/app/cmd"
+APP_SRC_CMD_PKG = "github.com/DexterRepositories/Hysteria/app/cmd"
 
 MODULE_SRC_DIRS = [CORE_SRC_DIR, EXTRAS_SRC_DIR, APP_SRC_DIR]
 
@@ -348,6 +347,8 @@ def cmd_test(module=None):
 
 
 def cmd_publish(urgent=False):
+    import requests
+
     if not check_build_env():
         return
 

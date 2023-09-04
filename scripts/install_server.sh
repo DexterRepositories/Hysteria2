@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
-# install_server.sh - hysteria server install script
-# Try `install_server.sh --help` for usage.
+# Script By: Dexter Eskalarte
+# Develop By: MEDIATEK TEAM
 #
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2023 Aperture Internet Laboratory
+# Copyright (c) 2022 Aperture Internet Laboratory
 #
 
 set -e
@@ -645,7 +645,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=$EXECUTABLE_INSTALL_PATH -config ${_config_name}.json server
+ExecStart=$EXECUTABLE_INSTALL_PATH server --config ${_config_name}.json
 WorkingDirectory=$CONFIG_DIR
 User=$HYSTERIA_USER
 Group=$HYSTERIA_USER
@@ -672,22 +672,16 @@ tpl_hysteria_server_x_service() {
 # /etc/hysteria/config.json
 tpl_etc_hysteria_config_json() {
   cat << EOF
-# listen: :443
-
-acme:
-  domains:
-    - your.domain.net
-  email: your@email.com
-
-auth:
-  type: password
-  password: Se7RAuFZ8Lzg
-
-masquerade:
-  type: proxy
-  proxy:
-    url: https://news.ycombinator.com/
-    rewriteHost: true
+{
+  "listen": ":36712",
+  "acme": {
+    "domains": [
+      "your.domain.com"
+    ],
+    "email": "your@email.com"
+  },
+  "obfs": "8ZuA2Zpqhuk8yakXvMjDqEXBwY"
+}
 EOF
 }
 
@@ -794,7 +788,7 @@ download_hysteria() {
   local _destination="$2"
 
   local _download_url="$REPO_URL/releases/download/$_version/hysteria-$OPERATING_SYSTEM-$ARCHITECTURE"
-  echo "Downloading hysteria archive: $_download_url ..."
+  echo "Downloading hysteria binary: $_download_url ..."
   if ! curl -R -H 'Cache-Control: no-cache' "$_download_url" -o "$_destination"; then
     error "Download failed! Please check your network and try again."
     return 11
@@ -972,7 +966,7 @@ perform_install() {
     echo
     echo -e "$(tbold)Hysteria has been successfully update to $VERSION.$(treset)"
     echo
-    echo -e "Check out the latest changelog $(tblue)https://github.com/apernet/hysteria/blob/master/CHANGELOG.md$(treset)"
+    echo -e "Check out the latest changelog $(tblue)https://github.com/DexterRepositories/Hysteria/blob/main/CHANGELOG.md$(treset)"
     echo
   fi
 }
@@ -1043,3 +1037,5 @@ main() {
 main "$@"
 
 # vim:set ft=bash ts=2 sw=2 sts=2 et:
+
+

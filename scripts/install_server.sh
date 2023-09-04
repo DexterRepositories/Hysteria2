@@ -778,8 +778,8 @@ get_latest_version() {
     exit 11
   fi
 
-  local _latest_version=$(grep 'tag_name' "$_tmpfile" | head -1 | grep -o '"app/v.*"')
-  _latest_version=${_latest_version#'"app/'}
+  local _latest_version=$(grep 'tag_name' "$_tmpfile" | head -1 | grep -o '"v.*"')
+  _latest_version=${_latest_version#'"'}
   _latest_version=${_latest_version%'"'}
 
   if [[ -n "$_latest_version" ]]; then

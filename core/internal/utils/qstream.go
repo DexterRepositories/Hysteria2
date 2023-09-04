@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/DexterRepositories/quic-go"
+	"github.com/apernet/quic-go"
 )
 
 // QStream is a wrapper of quic.Stream that handles Close() in a way that

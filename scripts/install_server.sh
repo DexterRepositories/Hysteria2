@@ -30,8 +30,8 @@ SYSTEMD_SERVICES_DIR="/etc/systemd/system"
 CONFIG_DIR="/etc/hysteria"
 
 # URLs of GitHub
-REPO_URL="https://github.com/DexterRepositories/Hysteria2"
-API_BASE_URL="https://api.github.com/repos/DexterRepositories/Hysteria2"
+REPO_URL="https://github.com/DexterRepositories/Hysteria"
+API_BASE_URL="https://api.github.com/repos/DexterRepositories/Hysteria"
 
 # curl command line flags.
 # To using a proxy, please specify ALL_PROXY in the environ variable, such like:
@@ -182,15 +182,12 @@ install_content() {
   local _install_flags="$1"
   local _content="$2"
   local _destination="$3"
-  local _overwrite="$4"
 
   local _tmpfile="$(mktemp)"
 
   echo -ne "Install $_destination ... "
   echo "$_content" > "$_tmpfile"
-  if [[ -z "$_overwrite" && -e "$_destination" ]]; then
-    echo -e "exists"
-  elif install "$_install_flags" "$_tmpfile" "$_destination"; then
+  if install "$_install_flags" "$_tmpfile" "$_destination"; then
     echo -e "ok"
   fi
 
@@ -606,7 +603,7 @@ parse_arguments() {
     esac
     shift
   done
-
+  
   if [[ -z "$OPERATION" ]]; then
     OPERATION='install'
   fi
@@ -645,7 +642,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=$EXECUTABLE_INSTALL_PATH server --config ${_config_name}.json
+ExecStart=$EXECUTABLE_INSTALL_PATH -config ${_config_name}.json server
 WorkingDirectory=$CONFIG_DIR
 User=$HYSTERIA_USER
 Group=$HYSTERIA_USER
@@ -743,20 +740,9 @@ is_hysteria_installed() {
   return 1
 }
 
-is_hysteria1_version() {
-  local _version="$1"
-
-  has_prefix "$_version" "v1." || has_prefix "$_version" "v0."
-}
-
 get_installed_version() {
   if is_hysteria_installed; then
-    if "$EXECUTABLE_INSTALL_PATH" version > /dev/null 2>&1; then
-      "$EXECUTABLE_INSTALL_PATH" version | grep Version | grep -o 'v[.1-9]*'
-    elif "$EXECUTABLE_INSTALL_PATH" -v > /dev/null 2>&1; then
-      # hysteria 1
-      "$EXECUTABLE_INSTALL_PATH" -v | cut -d ' ' -f 3
-    fi
+    "$EXECUTABLE_INSTALL_PATH" -v | cut -d ' ' -f 3
   fi
 }
 
@@ -767,7 +753,7 @@ get_latest_version() {
   fi
 
   local _tmpfile=$(mktemp)
-  if ! curl -sS -H 'Accept: application/vnd.github.v3+json' "$API_BASE_URL/releases/latest" -o "$_tmpfile"; then
+  if ! curl -sS -H 'Accept: application/vnd.github.v3+json' "https://api.github.com/repos/DexterRepositories/Hysteria2/releases/latest" -o "$_tmpfile"; then
     error "Failed to get latest release, please check your network."
     exit 11
   fi
@@ -787,8 +773,8 @@ download_hysteria() {
   local _version="$1"
   local _destination="$2"
 
-  local _download_url="$REPO_URL/releases/download/$_version/hysteria-$OPERATING_SYSTEM-$ARCHITECTURE"
-  echo "Downloading hysteria binary: $_download_url ..."
+  local _download_url="https://github.com/DexterRepositories/Hysteria2/releases/download/v2.0.0/hysteria-$OPERATING_SYSTEM-$ARCHITECTURE"
+  echo "Downloading hysteria archive: $_download_url ..."
   if ! curl -R -H 'Cache-Control: no-cache' "$_download_url" -o "$_destination"; then
     error "Download failed! Please check your network and try again."
     return 11
@@ -837,7 +823,7 @@ perform_install_hysteria_binary() {
     note "Performing local install: $LOCAL_FILE"
 
     echo -ne "Installing hysteria executable ... "
-
+    
     if install -Dm755 "$LOCAL_FILE" "$EXECUTABLE_INSTALL_PATH"; then
       echo "ok"
     else
@@ -870,7 +856,9 @@ perform_remove_hysteria_binary() {
 }
 
 perform_install_hysteria_example_config() {
-  install_content -Dm644 "$(tpl_etc_hysteria_config_json)" "$CONFIG_DIR/config.json" ""
+  if [[ ! -d "$CONFIG_DIR" ]]; then
+    install_content -Dm644 "$(tpl_etc_hysteria_config_json)" "$CONFIG_DIR/config.json"
+  fi
 }
 
 perform_install_hysteria_systemd() {
@@ -878,8 +866,8 @@ perform_install_hysteria_systemd() {
     return
   fi
 
-  install_content -Dm644 "$(tpl_hysteria_server_service)" "$SYSTEMD_SERVICES_DIR/hysteria-server.service" "1"
-  install_content -Dm644 "$(tpl_hysteria_server_x_service)" "$SYSTEMD_SERVICES_DIR/hysteria-server@.service" "1"
+  install_content -Dm644 "$(tpl_hysteria_server_service)" "$SYSTEMD_SERVICES_DIR/hysteria-server.service"
+  install_content -Dm644 "$(tpl_hysteria_server_x_service)" "$SYSTEMD_SERVICES_DIR/hysteria-server@.service"
 
   systemctl daemon-reload
 }
@@ -901,11 +889,8 @@ perform_install_hysteria_home_legacy() {
 
 perform_install() {
   local _is_frash_install
-  local _is_upgrade_from_hysteria1
   if ! is_hysteria_installed; then
     _is_frash_install=1
-  elif is_hysteria1_version "$(get_installed_version)"; then
-    _is_upgrade_from_hysteria1=1
   fi
 
   local _is_update_required
@@ -926,11 +911,6 @@ perform_install() {
     return
   fi
 
-  if is_hysteria1_version "$VERSION"; then
-    error "This script can be only used to install the Hysteria 2"
-    exit 95
-  fi
-
   perform_install_hysteria_binary
   perform_install_hysteria_example_config
   perform_install_hysteria_home_legacy
@@ -938,28 +918,15 @@ perform_install() {
 
   if [[ -n "$_is_frash_install" ]]; then
     echo
-    echo -e "$(tbold)Congratulation! Hysteria 2 has been successfully installed on your server.$(treset)"
+    echo -e "$(tbold)Congratulation! Hysteria has been successfully installed on your server.$(treset)"
     echo
     echo -e "What's next?"
     echo
-    echo -e "\t+ Take a look at the differences between Hysteria 2 and Hysteria 1 at https://hysteria.network/docs/misc/2-vs-1/"
-    echo -e "\t+ Check out the quick server config guide at $(tblue)https://hysteria.network/docs/getting-started/Server/$(treset)"
+    echo -e "\t+ Check out the latest quick start guide at $(tblue)https://hysteria.network/docs/quick-start/$(treset)"
     echo -e "\t+ Edit server config file at $(tred)$CONFIG_DIR/config.json$(treset)"
     echo -e "\t+ Start your hysteria server with $(tred)systemctl start hysteria-server.service$(treset)"
     echo -e "\t+ Configure hysteria start on system boot with $(tred)systemctl enable hysteria-server.service$(treset)"
     echo
-  elif [[ -n "$_is_upgrade_from_hysteria1" ]]; then
-    echo -e "Skip automatic service restart due to $(tred)incompatible$(treset) upgrade."
-    echo
-    echo -e "$(tbold)Hysteria has been successfully update to $VERSION from Hysteria 1.$(treset)"
-    echo
-    echo -e "$(tred)Hysteria 2 uses a completely redesigned protocol & config, which is NOT compatible with the version 1.x.x in any way.$(treset)"
-    echo
-    echo -e "\t+ Take a look at the behavior changes in Hysteria 2 at $(tblue)https://hysteria.network/docs/misc/2-vs-1/$(treset)"
-    echo -e "\t+ Check out the quick server configuration guide for Hysteria 2 at $(tblue)https://hysteria.network/docs/getting-started/Server/$(treset)"
-    echo -e "\t+ Migrate server config file to the Hysteria 2 at $(tred)$CONFIG_DIR/config.json$(treset)"
-    echo -e "\t+ Start your hysteria server with $(tred)systemctl restart hysteria-server.service$(treset)"
-    echo -e "\t+ Configure hysteria start on system boot with $(tred)systemctl enable hysteria-server.service$(treset)"
   else
     restart_running_services
 
@@ -1037,5 +1004,3 @@ main() {
 main "$@"
 
 # vim:set ft=bash ts=2 sw=2 sts=2 et:
-
-

@@ -645,7 +645,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=$EXECUTABLE_INSTALL_PATH server --config ${_config_name}.json
+ExecStart=$EXECUTABLE_INSTALL_PATH -config ${_config_name}.json server
 WorkingDirectory=$CONFIG_DIR
 User=$HYSTERIA_USER
 Group=$HYSTERIA_USER

@@ -16,12 +16,12 @@ import (
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 
-	"github.com/apernet/hysteria/app/internal/utils"
-	"github.com/apernet/hysteria/core/server"
-	"github.com/apernet/hysteria/extras/auth"
-	"github.com/apernet/hysteria/extras/obfs"
-	"github.com/apernet/hysteria/extras/outbounds"
-	"github.com/apernet/hysteria/extras/trafficlogger"
+	"github.com/DexterRepositories/Hysteria2/app/internal/utils"
+	"github.com/DexterRepositories/Hysteria2/core/server"
+	"github.com/DexterRepositories/Hysteria2/extras/auth"
+	"github.com/DexterRepositories/Hysteria2/extras/obfs"
+	"github.com/DexterRepositories/Hysteria2/extras/outbounds"
+	"github.com/DexterRepositories/Hysteria2/extras/trafficlogger"
 )
 
 var serverCmd = &cobra.Command{

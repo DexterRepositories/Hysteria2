@@ -8,7 +8,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/apernet/hysteria/core/internal/congestion/common"
+	"github.com/DexterRepositories/Hysteria2a/core/internal/congestion/common"
 	"github.com/apernet/quic-go/congestion"
 	"github.com/zhangyunhao116/fastrand"
 )

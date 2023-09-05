@@ -3,7 +3,7 @@ package brutal
 import (
 	"time"
 
-	"github.com/apernet/hysteria/core/internal/congestion/common"
+	"github.com/DexterRepositories/Hysteria2/core/internal/congestion/common"
 
 	"github.com/apernet/quic-go/congestion"
 )

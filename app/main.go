@@ -1,6 +1,6 @@
 package main
 
-import "github.com/apernet/hysteria/app/cmd"
+import "github.com/DexterRepositories/Hysteria2/app/cmd"
 
 func main() {
 	cmd.Execute()

@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/apernet/hysteria/core/server"
+	"github.com/DexterRepositories/Hysteria2/core/server"
 )
 
 var _ server.Authenticator = &CommandAuthenticator{}

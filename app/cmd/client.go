@@ -16,15 +16,15 @@ import (
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 
-	"github.com/apernet/hysteria/app/internal/forwarding"
-	"github.com/apernet/hysteria/app/internal/http"
-	"github.com/apernet/hysteria/app/internal/socks5"
-	"github.com/apernet/hysteria/app/internal/tproxy"
-	"github.com/apernet/hysteria/app/internal/url"
-	"github.com/apernet/hysteria/app/internal/utils"
-	"github.com/apernet/hysteria/core/client"
-	"github.com/apernet/hysteria/extras/obfs"
-	"github.com/apernet/hysteria/extras/transport/udphop"
+	"github.com/DexterRepositories/Hysteria2/app/internal/forwarding"
+	"github.com/DexterRepositories/Hysteria2/app/internal/http"
+	"github.com/DexterRepositories/Hysteria2/app/internal/socks5"
+	"github.com/DexterRepositories/Hysteria2/app/internal/tproxy"
+	"github.com/DexterRepositories/Hysteria2/app/internal/url"
+	"github.com/DexterRepositories/Hysteria2/app/internal/utils"
+	"github.com/DexterRepositories/Hysteria2/core/client"
+	"github.com/DexterRepositories/Hysteria2/extras/obfs"
+	"github.com/DexterRepositories/Hysteria2/extras/transport/udphop"
 )
 
 // Client flags

@@ -12,9 +12,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/apernet/hysteria/core/internal/integration_tests/mocks"
-	"github.com/apernet/hysteria/core/internal/protocol"
-	"github.com/apernet/hysteria/core/server"
+	"github.com/DexterRepositories/Hysteria2/core/internal/integration_tests/mocks"
+	"github.com/DexterRepositories/Hysteria2/core/internal/protocol"
+	"github.com/aDexterRepositories/Hysteria2/core/server"
 
 	"github.com/apernet/quic-go"
 	"github.com/apernet/quic-go/http3"

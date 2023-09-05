@@ -5,7 +5,7 @@ import (
 	"io"
 	"net"
 
-	"github.com/apernet/hysteria/core/server"
+	"github.com/DexterRepositories/Hysteria2/core/server"
 )
 
 // This file provides utilities for the integration tests.

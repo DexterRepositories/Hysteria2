@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/apernet/hysteria/extras/outbounds/acl"
+	"github.com/DexterRepositories/Hysteria2/extras/outbounds/acl"
 	"github.com/oschwald/geoip2-golang"
 )
 

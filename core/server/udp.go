@@ -8,9 +8,9 @@ import (
 
 	"github.com/apernet/quic-go"
 
-	"github.com/apernet/hysteria/core/internal/frag"
-	"github.com/apernet/hysteria/core/internal/protocol"
-	"github.com/apernet/hysteria/core/internal/utils"
+	"github.com/DexterRepositories/Hysteria2/core/internal/frag"
+	"github.com/DexterRepositories/Hysteria2/core/internal/protocol"
+	"github.com/DexterRepositories/Hysteria2/core/internal/utils"
 )
 
 const (

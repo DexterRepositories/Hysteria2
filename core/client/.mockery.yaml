@@ -2,7 +2,7 @@ with-expecter: true
 inpackage: true
 dir: .
 packages:
-  github.com/apernet/hysteria/core/client:
+  github.com/DexterRepositories/Hysteria2/core/client:
     interfaces:
       udpIO:
         config:

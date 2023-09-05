@@ -8,10 +8,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/apernet/hysteria/core/client"
-	"github.com/apernet/hysteria/core/errors"
-	"github.com/apernet/hysteria/core/internal/integration_tests/mocks"
-	"github.com/apernet/hysteria/core/server"
+	"github.com/DexterRepositories/Hysteria2/core/client"
+	"github.com/DexterRepositories/Hysteria2/core/errors"
+	"github.com/DexterRepositories/Hysteria2/core/internal/integration_tests/mocks"
+	"github.com/DexterRepositories/Hysteria2/core/server"
 )
 
 // TestClientServerTCPClose tests whether the client/server propagates the close of a connection correctly.

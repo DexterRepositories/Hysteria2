@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/apernet/hysteria/app/internal/utils_test"
+	"github.com/DexterRepositories/Hysteria2/app/internal/utils_test"
 )
 
 func TestTCPTunnel(t *testing.T) {

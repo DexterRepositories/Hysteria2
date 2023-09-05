@@ -10,8 +10,8 @@ import (
 	"github.com/stretchr/testify/mock"
 	"go.uber.org/goleak"
 
-	coreErrs "github.com/apernet/hysteria/core/errors"
-	"github.com/apernet/hysteria/core/internal/protocol"
+	coreErrs "github.com/DexterRepositories/Hysteria2/core/errors"
+	"github.com/DexterRepositories/Hysteria2/core/internal/protocol"
 )
 
 func TestUDPSessionManager(t *testing.T) {

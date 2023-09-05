@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/apernet/hysteria/core/errors"
-	"github.com/apernet/hysteria/core/internal/pmtud"
+	"github.com/DexterRepositories/Hysteria2/core/errors"
+	"github.com/DexterRepositories/Hysteria2/core/internal/pmtud"
 )
 
 const (

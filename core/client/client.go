@@ -8,10 +8,10 @@ import (
 	"net/url"
 	"time"
 
-	coreErrs "github.com/apernet/hysteria/core/errors"
-	"github.com/apernet/hysteria/core/internal/congestion"
-	"github.com/apernet/hysteria/core/internal/protocol"
-	"github.com/apernet/hysteria/core/internal/utils"
+	coreErrs "github.com/DexterRepositories/Hysteria2/core/errors"
+	"github.com/DexterRepositories/Hysteria2/core/internal/congestion"
+	"github.com/DexterRepositories/Hysteria2/core/internal/protocol"
+	"github.com/DexterRepositories/Hysteria2/core/internal/utils"
 
 	"github.com/apernet/quic-go"
 	"github.com/apernet/quic-go/http3"

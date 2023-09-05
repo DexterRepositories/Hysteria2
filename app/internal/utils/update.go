@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/apernet/hysteria/core/client"
+	"github.com/DexterRepositories/Hysteria2/core/client"
 )
 
 const (

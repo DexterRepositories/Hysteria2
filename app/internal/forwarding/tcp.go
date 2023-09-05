@@ -4,7 +4,7 @@ import (
 	"io"
 	"net"
 
-	"github.com/apernet/hysteria/core/client"
+	"github.com/DexterRepositories/Hysteria2/core/client"
 )
 
 type TCPTunnel struct {

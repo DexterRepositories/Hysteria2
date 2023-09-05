@@ -1,9 +1,9 @@
 package congestion
 
 import (
-	"github.com/apernet/hysteria/core/internal/congestion/bbr"
-	"github.com/apernet/hysteria/core/internal/congestion/brutal"
-	"github.com/apernet/hysteria/core/internal/congestion/common"
+	"github.com/DexterRepositories/Hysteria2/core/internal/congestion/bbr"
+	"github.com/DexterRepositories/Hysteria2/core/internal/congestion/brutal"
+	"github.com/DexterRepositories/Hysteria2/core/internal/congestion/common"
 	"github.com/apernet/quic-go"
 )
 

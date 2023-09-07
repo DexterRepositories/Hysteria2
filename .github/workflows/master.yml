@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - wip-hy2
 
 jobs:
   build:
@@ -29,7 +28,6 @@ jobs:
 
       - name: Run build script
         run: |
-          pip install requests
           export HY_APP_PLATFORMS=$(sed 's/\r$//' platforms.txt | awk '!/^#/ && !/^$/' | paste -sd ",")
           python hyperbole.py build -r
 
